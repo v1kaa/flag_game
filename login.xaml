@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="WpfApp6.login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp6"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FF007CAB" Offset="0"/>
+			<GradientStop Color="#FF44C2FF" Offset="1"/>
+		</LinearGradientBrush>
+	</UserControl.Background>
+	<Grid Margin="0,0,94,0">
+		<Label Content="Login" HorizontalAlignment="Left" Height="64" Margin="93,80,0,0" VerticalAlignment="Top" Width="185" FontSize="36" FontWeight="Bold" Foreground="White"/>
+		<Label Content="Sign in" HorizontalAlignment="Left" Height="64" Margin="501,80,0,0" VerticalAlignment="Top" Width="185" FontSize="36" FontWeight="Bold" Foreground="White"/>
+		<TextBox x:Name="login_user_name" HorizontalAlignment="Left" Margin="65,144,0,0" TextWrapping="Wrap" GotFocus="login_user_name_GotFocus" Text="Username" VerticalAlignment="Top" Width="250" Height="40" FontSize="16" BorderThickness="0" Background="#33FFFFFF" Foreground="White" Padding="10"/>
+		<PasswordBox x:Name="login_user_password" HorizontalAlignment="Left" Margin="65,225,0,0" GotFocus="login_user_password_GotFocus" Password="user password" VerticalAlignment="Top" Width="250" Height="40" FontSize="16" BorderThickness="0" Background="#33FFFFFF" Foreground="White" Padding="10"/>
+		<Button  Content="Log In" HorizontalAlignment="Left" Height="40" Margin="65,294,0,0" VerticalAlignment="Top" 
+                 Click="log_in_Click" Width="200" FontSize="20" FontWeight="Bold" Background="#FF007CAB" Foreground="White" BorderThickness="0"/>
+		<TextBox  x:Name="signin_user_name" HorizontalAlignment="Left" Margin="473,144,0,0" GotFocus="signin_user_name_GotFocus" TextWrapping="Wrap" Text="Create your username" VerticalAlignment="Top" Width="250" Height="40" FontSize="16" BorderThickness="0" Background="#33FFFFFF" Foreground="White" Padding="10"/>
+		<TextBox x:Name="signin_user_password" HorizontalAlignment="Left" Margin="473,225,0,0" GotFocus="signin_user_password_GotFocus" TextWrapping="Wrap" Text="Create password" VerticalAlignment="Top" Width="250" Height="40" FontSize="16" BorderThickness="0" Background="#33FFFFFF" Foreground="White" Padding="10"/>
+		<Button x:Name="sign_in" Content="Sign in" HorizontalAlignment="Left" Height="40"
+                Click="sign_in_Click" Margin="473,294,0,0" VerticalAlignment="Top" Width="200" FontSize="20" FontWeight="Bold" Background="#FF007CAB" Foreground="White" BorderThickness="0"/>
+	</Grid>
+</UserControl>
