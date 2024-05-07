@@ -13,6 +13,7 @@ namespace WpfApp6
     {
         private string connectionString = "Data Source=LAPTOP-FQBEUBB7\\VIKA;Initial Catalog=users;Integrated Security=True";
         private string filePath = @"C:\Users\Acer\Downloads\Country.json";
+        private int uncorrect_answers = 0;
         private JObject country;
         private int score = 0;
         private DispatcherTimer timer_object;
@@ -24,43 +25,21 @@ namespace WpfApp6
 
         public first_one(string user, int user_id)
         {
+            startTime = DateTime.Now;
             InitializeComponent();
             user_label.Content = user;
             userId = user_id;
             user_name = user;
 
 
-             string GetPasswordFromDatabase(int userId)
-            {
-                string password = string.Empty;
-
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        string query = "SELECT user_pass FROM users WHERE Id = @userId";
-                        using (SqlCommand command = new SqlCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@userId", userId);
-                            connection.Open();
-                            password = (string)command.ExecuteScalar();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while retrieving password: " + ex.Message);
-                }
-
-                return password;
-            }
+            
 
 
 
 
 
             // Start the timer when the user control is initialized
-            startTime = DateTime.Now;
+           // startTime = DateTime.Now;
             timer_object = new DispatcherTimer();
             timer_object.Interval = TimeSpan.FromSeconds(1);
             timer_object.Tick += Timer_Tick;
@@ -146,6 +125,7 @@ namespace WpfApp6
             else
             {
                 MessageBox.Show("Incorrect answer");
+                uncorrect_answers++;
                 choose_new_flag_data();
             }
 
@@ -194,15 +174,17 @@ namespace WpfApp6
         }
         private void AddRowToTable()
         {
-            string insertQuery = "INSERT INTO [dbo].[Table] (user_id, time, date) VALUES (@userId, @time, @date)";
+            string insertQuery = "INSERT INTO [dbo].[Table] (user_id, time, date, uncorrect,type_of_game) VALUES (@userId, @time, @date, @uncorrect, @game)";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
                     command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@uncorrect", uncorrect_answers);
                     command.Parameters.AddWithValue("@time", endTimeResult); // Using the result of the timer
                     command.Parameters.AddWithValue("@date", DateTime.Now.Date.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@game", "flag to coutnrieS");
 
                     try
                     {

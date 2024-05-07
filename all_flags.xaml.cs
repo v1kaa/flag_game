@@ -22,10 +22,14 @@ namespace WpfApp6
     public partial class all_flags : UserControl
     {
         private string filePath = @"C:\Users\Acer\Downloads\Country.json";
-        public all_flags()
+        private string user_name;
+        private string user_pass;
+        public all_flags(string name, string pass)
         {
             InitializeComponent();
             DisplayAllFlags();
+            user_name = name;
+            user_pass = pass;
         }
 
         private void DisplayAllFlags()
@@ -67,6 +71,13 @@ namespace WpfApp6
             {
                 MessageBox.Show("An error occurred while displaying flags: " + ex.Message);
             }
+        }
+
+        private void return_to_user_page_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if the UserControl is hosted within a Frame
+            Window w = Window.GetWindow(this);
+            w.Content = new user_page(user_name, user_pass);
         }
     }
 }

@@ -65,6 +65,9 @@
     <Compile Include="all_flags.xaml.cs">
       <DependentUpon>all_flags.xaml</DependentUpon>
     </Compile>
+    <Compile Include="country_to_flags.xaml.cs">
+      <DependentUpon>country_to_flags.xaml</DependentUpon>
+    </Compile>
     <Compile Include="usersDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,6 +82,10 @@
       <DependentUpon>user_page.xaml</DependentUpon>
     </Compile>
     <Page Include="all_flags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="country_to_flags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

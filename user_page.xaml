@@ -26,6 +26,7 @@
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Time" Binding="{Binding time}" Width="*" />
 				<DataGridTextColumn Header="Date" Binding="{Binding date}" Width="*" />
+				<DataGridTextColumn Header="mistakes" Binding="{Binding uncorrect}" Width="*"/>
 			</DataGrid.Columns>
 		</DataGrid>
 
@@ -34,5 +35,12 @@
 
 		<!-- Learning Button -->
 		<Button Content="Learning" Click="learning_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0" Background="#FF007CAB" Foreground="White" BorderThickness="2" RenderTransformOrigin="0.382,-0.795" Grid.RowSpan="2"/>
+		<Button Content="logOut" Click="logout_Click" HorizontalAlignment="Left" Height="19" Margin="715,19,0,0" VerticalAlignment="Top" Width="57"/>
+		<ComboBox x:Name="selectionComboBox" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top" Width="120" Grid.Row="1" SelectionChanged="selectionComboBox_SelectionChanged">
+			<ComboBoxItem Tag="FlagToCountries">Flag to Countries</ComboBoxItem>
+			<ComboBoxItem Tag="CountryToFlags">Country to Flags</ComboBoxItem>
+		</ComboBox>
+
+
 	</Grid>
 </UserControl>

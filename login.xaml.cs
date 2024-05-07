@@ -17,7 +17,7 @@ namespace WpfApp6
         public login()
         {
             InitializeComponent();
-            
+
         }
         private void login_user_name_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -106,6 +106,7 @@ namespace WpfApp6
                         MessageBox.Show("An error occurred while checking username: " + ex.Message);
                         return;
                     }
+                    connection.Close();
                 }
 
                 string insertQuery = "INSERT INTO users (user_name, user_pass) VALUES (@UserName, @Password)";
@@ -123,7 +124,12 @@ namespace WpfApp6
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("User signed in successfully!");
-                            connection.Close();
+                            // Close the current window
+                            Window w = Window.GetWindow(this);
+
+                            // Open the user page
+                            w.Content = new user_page(signin_user_name.Text, signin_user_password.Text);
+                            
                         }
                         else
                         {
@@ -137,6 +143,8 @@ namespace WpfApp6
                 }
             }
         }
+
+
 
 
     }
