@@ -69,7 +69,7 @@ namespace WpfApp6
 
                             // SQL query to retrieve data from the Table table using the user ID
                             // SQL query to retrieve data from the Table table using the user ID
-                            string query = "SELECT time, date, uncorrect FROM [dbo].[Table] WHERE user_id = @userId";
+                            string query = "SELECT time, date, uncorrect, type_of_game FROM [dbo].[Table] WHERE user_id = @userId";
 
 
                             // Create a SqlCommand object for retrieving data from the Table table
@@ -143,6 +143,12 @@ namespace WpfApp6
                         break;
                 }
             }
+        }
+       private void  achievements_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = Window.GetWindow(this);
+            w.Content = new achievements(name_user, password_user);
+
         }
 
     }

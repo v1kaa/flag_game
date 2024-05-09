@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System;
+using System.Linq;
 
 namespace WpfApp6
 {
@@ -82,6 +83,14 @@ namespace WpfApp6
         // Obsługa kliknięcia przycisku Zarejestruj
         private void sign_in_Click(object sender, RoutedEventArgs e)
         {
+            // Check if the password meets the requirements
+            string password = signin_user_password.Text;
+            if (password.Length < 6 || !password.Any(char.IsDigit) || !password.Any(char.IsLetter))
+            {
+                MessageBox.Show("Password must be at least 6 characters long and contain at least one letter and one digit.");
+                return;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string checkQuery = "SELECT COUNT(*) FROM users WHERE user_name = @UserName";
@@ -114,7 +123,7 @@ namespace WpfApp6
                 using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
                 {
                     insertCommand.Parameters.AddWithValue("@UserName", signin_user_name.Text);
-                    insertCommand.Parameters.AddWithValue("@Password", signin_user_password.Text);
+                    insertCommand.Parameters.AddWithValue("@Password", password);
 
                     try
                     {
@@ -128,8 +137,8 @@ namespace WpfApp6
                             Window w = Window.GetWindow(this);
 
                             // Open the user page
-                            w.Content = new user_page(signin_user_name.Text, signin_user_password.Text);
-                            
+                            w.Content = new user_page(signin_user_name.Text, password);
+
                         }
                         else
                         {
@@ -143,6 +152,7 @@ namespace WpfApp6
                 }
             }
         }
+
 
 
 

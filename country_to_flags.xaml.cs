@@ -29,6 +29,7 @@ namespace WpfApp6
         private int uncorrect_answer = 0;
         private DispatcherTimer timer_object;
         private DateTime startTime;
+        private int achievements_count = 0;
 
         private JObject country1;
 
@@ -120,23 +121,41 @@ namespace WpfApp6
         {
             if (selectedPhotoUrl == flagLink1)
             {
-                MessageBox.Show("Correct");
                 score++;
-                score_label.Content = "score: " + score + "/20";
+                achievements_count++;
+                score_label.Text = "score: " + score + "/20";
                 choose_new_country();
+                switch (achievements_count)
+                {
+                    case 3:
+                        add_achievement_to_table_in_row(achievements_count);
+                        break;
+                    case 5:
+                        add_achievement_to_table_in_row(achievements_count);
+                        break;
+                    case 10:
+                        add_achievement_to_table_in_row(achievements_count);
+                        break;
+                    case 20:
+                        add_achievement_to_table_in_row(achievements_count);
+                        break;
+                    default:
+                        break;
+                }
 
-                if (score == 5)
+                if (score == 20)
                 {
                     timer_object.Stop();
                     MessageBox.Show("You won!");
                     AddRowToTable();
                     score = 0;
-                    score_label.Content = "score: 0/20";
+                    score_label.Text = "score: 0/20";
 
                 }
             }
             else
             {
+                achievements_count = 0;
                 uncorrect_answer++;
                 MessageBox.Show("Incorrect");
                 choose_new_country();
@@ -221,8 +240,49 @@ namespace WpfApp6
             return password;
         }
 
+        private void add_achievement_to_table_in_row(int x)
+        {
+            string insertQuery = "INSERT INTO [dbo].achievements (user_name, description) VALUES (@user_name, @description)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@user_name", user_name);
+                    switch (x)
+                    {
+                        case 3:
+                            command.Parameters.AddWithValue("@description", "Three in a row");
+                            MessageBox.Show("3 New achievement  added.");
+                            break;
+                        case 5:
+                            command.Parameters.AddWithValue("@description", "Five in a row");
+                            MessageBox.Show("5 New achievement  added.");
+                            break;
+                        case 10:
+                            command.Parameters.AddWithValue("@description", "Ten in a row");
+                            MessageBox.Show("10 New achievement  added.");
+                            break;
+                        case 20:
+                            command.Parameters.AddWithValue("@description", "All flags no mistakes");
+                            MessageBox.Show(" all New achievement  added.");
+                            break;
+                        default:
+                            break;
+                    }
 
 
+                    connection.Open(); // Open the connection
+                    command.ExecuteNonQuery(); // Execute the SQL command
+                    connection.Close(); // Close the connection
+                }
+            }
+            MessageBox.Show("New achievement  added."); // Notify user after achievement added
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = Window.GetWindow(this);
+            w.Content = new user_page(user_name, GetPasswordFromDatabase(userId));
+        }
     }
 }

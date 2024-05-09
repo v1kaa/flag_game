@@ -21,7 +21,9 @@ namespace WpfApp6
         private string endTimeResult;
         private int userId;
         private string user_name;
-        private string pass;// Assuming you have the user ID available in this class
+        private string pass;
+        private int achievements_counter = 0;
+        // Assuming you have the user ID available in this class
 
         public first_one(string user, int user_id)
         {
@@ -32,14 +34,14 @@ namespace WpfApp6
             user_name = user;
 
 
-            
+
 
 
 
 
 
             // Start the timer when the user control is initialized
-           // startTime = DateTime.Now;
+            // startTime = DateTime.Now;
             timer_object = new DispatcherTimer();
             timer_object.Interval = TimeSpan.FromSeconds(1);
             timer_object.Tick += Timer_Tick;
@@ -119,17 +121,36 @@ namespace WpfApp6
             if (country["name"]["common"].ToString() == selectedAnswer)
             {
                 score++;
+                achievements_counter++;
                 your_score.Text = "Your score: " + score + "/20";
                 choose_new_flag_data();
+                switch (achievements_counter)
+                {
+                    case 3:
+                        add_achievement_to_table_in_row(achievements_counter);
+                        break;
+                    case 5:
+                        add_achievement_to_table_in_row(achievements_counter);
+                        break;
+                   case 10:
+                        add_achievement_to_table_in_row(achievements_counter);
+                        break;
+                        case 20:
+                        add_achievement_to_table_in_row(achievements_counter);
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
                 MessageBox.Show("Incorrect answer");
                 uncorrect_answers++;
                 choose_new_flag_data();
+                achievements_counter = 0;
             }
 
-            if (score == 3)
+            if (score == 20)
             {
                 // Stop the timer
                 timer_object.Stop();
@@ -194,7 +215,7 @@ namespace WpfApp6
                         {
                             MessageBox.Show("New row added to the table.");
                             Window w = Window.GetWindow(this);
-                            w.Content = new user_page(user_name,GetPasswordFromDatabase(userId) );
+                            w.Content = new user_page(user_name, GetPasswordFromDatabase(userId));
                         }
                         else
                         {
@@ -207,6 +228,51 @@ namespace WpfApp6
                     }
                 }
             }
+        }
+
+
+        private void add_achievement_to_table_in_row(int x)
+        {
+            string insertQuery = "INSERT INTO [dbo].achievements (user_name, description) VALUES (@user_name, @description)";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@user_name", user_name);
+                    switch (x)
+                    {
+                        case 3:
+                            command.Parameters.AddWithValue("@description", "Three in a row");
+                            MessageBox.Show("3 New achievement  added.");
+                            break;
+                        case 5 :
+                            command.Parameters.AddWithValue("@description", "Five in a row");
+                            MessageBox.Show("5 New achievement  added.");
+                            break;
+                       case 10 :
+                            command.Parameters.AddWithValue("@description", "Ten in a row");
+                            MessageBox.Show("10 New achievement  added.");
+                            break;
+                        case 20:
+                            command.Parameters.AddWithValue("@description", "All flags no mistakes");
+                            MessageBox.Show( " all New achievement  added.");
+                            break;
+                        default:
+                            break;
+                    }
+                    
+
+                    connection.Open(); // Open the connection
+                    command.ExecuteNonQuery(); // Execute the SQL command
+                    connection.Close(); // Close the connection
+                }
+            }
+            MessageBox.Show("New achievement  added."); // Notify user after achievement added
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = Window.GetWindow(this);
+            w.Content = new user_page(user_name, GetPasswordFromDatabase(userId));
         }
     }
 }

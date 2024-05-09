@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WpfApp6"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="800"
              Background="LightGray">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -53,5 +53,25 @@
 		<!-- User Label -->
 		<Label x:Name="user_label" HorizontalAlignment="Left" VerticalAlignment="Center" 
                Margin="47,0,0,0" FontSize="20" FontWeight="Bold"/>
+		<Button Content="exit to user page" HorizontalAlignment="Left" 
+        Margin="552,0,0,0" VerticalAlignment="Center" Width="105" Height="30" Click="Button_Click">
+			<Button.Style>
+				<Style TargetType="Button">
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="MinWidth" Value="50"/>
+					<Setter Property="MinHeight" Value="20"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="Button">
+								<Border Background="White" BorderBrush="DarkGray" BorderThickness="2"
+                                CornerRadius="5" Padding="5">
+									<ContentPresenter/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Button.Style>
+		</Button>
 	</Grid>
 </UserControl>
