@@ -43,6 +43,9 @@
   <li><strong>SQL Database:</strong> Employed to securely store and manage user data, such as account information, gameplay results, and achievements, ensuring data integrity and efficient data retrieval.</li>
   <li><strong>JSON (JavaScript Object Notation):</strong> Utilized for handling data retrieved from external sources, such as country flag information, enabling serialization and deserialization of complex data structures within the application.</li>
 </ul>
+![image](https://github.com/v1kaa/flag_game/assets/108978479/c1e07da7-f9ff-43f9-8011-fbbc148549ce)
 
 </body>
 </html>
+
+
