@@ -43,9 +43,22 @@
   <li><strong>SQL Database:</strong> Employed to securely store and manage user data, such as account information, gameplay results, and achievements, ensuring data integrity and efficient data retrieval.</li>
   <li><strong>JSON (JavaScript Object Notation):</strong> Utilized for handling data retrieved from external sources, such as country flag information, enabling serialization and deserialization of complex data structures within the application.</li>
 </ul>
-![image](https://github.com/v1kaa/flag_game/assets/108978479/c1e07da7-f9ff-43f9-8011-fbbc148549ce)
+![Знімок екрана 2024-05-11 170820](https://github.com/v1kaa/flag_game/assets/108978479/6be15932-42bc-4567-8683-960904439055)
+
+![Знімок екрана 2024-05-11 170820](https://github.com/v1kaa/flag_game/assets/108978479/eb577ea5-f5ef-489a-a442-b614df18fe4f)
+![Знімок екрана 2024-05-11 170922](https://github.com/v1kaa/flag_game/assets/108978479/3dd72414-695f-4dea-8503-bbc96f7f5c13)
+![Знімок екрана 2024-05-11 170956](https://github.com/v1kaa/flag_game/assets/108978479/3d30c97c-8a97-4f76-8490-65aa2c6a3305)
+![Знімок екрана 2024-05-11 171029](https://github.com/v1kaa/flag_game/assets/108978479/be181a1e-144a-4d8a-bbd6-ff93955f132f)
+![Знімок екрана 2024-05-11 171043](https://github.com/v1kaa/flag_game/assets/108978479/1d122e29-05bc-4815-a4b5-1f07c7f8cd7d)
+
+
+
+
+
+![Знімок екрана 2024-05-11 165835](https://github.com/v1kaa/flag_game/assets/108978479/333b3525-3ea5-4ab0-af35-3de8fff8ade9)
 
 </body>
-</html>
+
+
 
 
